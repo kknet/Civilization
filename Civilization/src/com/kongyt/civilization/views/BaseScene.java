@@ -76,4 +76,8 @@ public class BaseScene implements Screen {
 
 	}
 
+	
+	public void onExit(){
+		
+	}
 }

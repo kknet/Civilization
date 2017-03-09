@@ -55,8 +55,8 @@ public class GameMap extends Group {
 		
 		
 		Texture tex2 = new Texture(Gdx.files.internal("images/map/wall.png"));
-		for(int i = -16; i < 0; i++){
-			for(int j = -9; j < this.height + 18; j++){
+		for(int i = -23; i < 0; i++){
+			for(int j = -13; j < this.height + 13; j++){
 				Sprite tmp = new Sprite(tex2);
 				tmp.setPosition(i * this.cellWidth, j * this.cellHeight);
 				tmp.setSize(this.cellWidth, this.cellHeight);
@@ -64,17 +64,8 @@ public class GameMap extends Group {
 			}
 		}
 		
-		for(int i = this.width; i < this.width + 16; i++){
-			for(int j = -9; j < this.height + 18; j++){
-				Sprite tmp = new Sprite(tex2);
-				tmp.setPosition(i * this.cellWidth, j * this.cellHeight);
-				tmp.setSize(this.cellWidth, this.cellHeight);
-				tiles.add(tmp);				
-			}
-		}
-		
-		for(int i = 0; i < this.width; i++){
-			for(int j = -9; j < 0; j++){
+		for(int i = this.width; i < this.width + 23; i++){
+			for(int j = -13; j < this.height + 13; j++){
 				Sprite tmp = new Sprite(tex2);
 				tmp.setPosition(i * this.cellWidth, j * this.cellHeight);
 				tmp.setSize(this.cellWidth, this.cellHeight);
@@ -83,7 +74,16 @@ public class GameMap extends Group {
 		}
 		
 		for(int i = 0; i < this.width; i++){
-			for(int j = this.height; j < this.height + 9; j++){
+			for(int j = -13; j < 0; j++){
+				Sprite tmp = new Sprite(tex2);
+				tmp.setPosition(i * this.cellWidth, j * this.cellHeight);
+				tmp.setSize(this.cellWidth, this.cellHeight);
+				tiles.add(tmp);				
+			}
+		}
+		
+		for(int i = 0; i < this.width; i++){
+			for(int j = this.height; j < this.height + 13; j++){
 				Sprite tmp = new Sprite(tex2);
 				tmp.setPosition(i * this.cellWidth, j * this.cellHeight);
 				tmp.setSize(this.cellWidth, this.cellHeight);
@@ -97,9 +97,9 @@ public class GameMap extends Group {
 			int x = (int)(Math.random() * (this.width -4)) + 2;
 			int y = (int)(Math.random() * (this.height -4)) + 2;
 			this.map[x][y] = 1;
-			this.map[x][y+1] = 1;
-			this.map[x+1][y] = 1;
-			this.map[x+1][y+1] = 1;
+//			this.map[x][y+1] = 1;
+//			this.map[x+1][y] = 1;
+//			this.map[x+1][y+1] = 1;
 		}
 	}
 	

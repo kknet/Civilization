@@ -31,7 +31,7 @@ public class MenuScene extends BaseScene {
 				GM.instance().changeScene(SV.SCENE_GAME);
 				break;
 			case Keys.ESCAPE:
-				GM.instance().exitGame();
+				GM.instance().getApplication().realExit();
 				break;
 			}
 			GM.instance().logD("按键"+keycode+"按下");

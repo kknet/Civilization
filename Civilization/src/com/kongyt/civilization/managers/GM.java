@@ -1,10 +1,14 @@
 package com.kongyt.civilization.managers;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.kongyt.civilization.CivilizationApplication;
 import com.kongyt.civilization.utils.SV;
+import com.kongyt.civilization.views.BaseScene;
 import com.kongyt.civilization.views.GameScene;
 import com.kongyt.civilization.views.MenuScene;
 
@@ -33,6 +37,14 @@ public class GM {
 	
 	//===============================================游戏相关==================================================
 	
+	private CivilizationApplication app;
+	public void registerApplication(CivilizationApplication app){
+		this.app = app;
+	}
+	
+	public CivilizationApplication getApplication(){
+		return this.app;
+	}
 	
 	private Game game;
 	
@@ -47,12 +59,11 @@ public class GM {
 	}
 	
 	
-	// 退出游戏
-	public void exitGame(){		
-		GM.instance.logD("游戏退出");
-		relInstance();
-		Gdx.app.exit();
+	// 处理退出事件
+	public void onExit(){
+		((BaseScene)(this.game.getScreen())).onExit();
 	}
+	
 	
 	// 销毁资源
 	private void destory(){

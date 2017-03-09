@@ -7,7 +7,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.kongyt.civilization.utils.SV;
 
 public class HeroAgent extends Group {
 	
@@ -37,6 +40,8 @@ public class HeroAgent extends Group {
 	private boolean isMoving = false;
 	
 	private GameMap map;
+	
+	private Actor cameraScaleActor;
 	
 	public enum HDir{
 		E,
@@ -84,6 +89,9 @@ public class HeroAgent extends Group {
 		currentAni = hero_s_ani;
 		
 		this.curSprite = new Sprite(hero_s[0]);
+		
+		cameraScaleActor = new Actor();
+		this.addActor(cameraScaleActor);
 	}
 
 	@Override
@@ -133,6 +141,9 @@ public class HeroAgent extends Group {
 		// TODO Auto-generated method stub
 		
 		super.act(delta);
+		
+		this.camera.viewportWidth = SV.SCREEN_WIDTH * this.cameraScaleActor.getScaleX();
+		this.camera.viewportHeight = SV.SCREEN_HEIGHT * this.cameraScaleActor.getScaleY();
 		
 		if(this.isMoving){
 			this.stateTime += delta;
@@ -289,4 +300,15 @@ public class HeroAgent extends Group {
 		}
 	}
 
+	
+	
+	public void pull(){
+		this.cameraScaleActor.addAction(Actions.scaleTo(1.5f, 1.5f, 1));
+	}
+	
+	public void push(){
+		this.cameraScaleActor.addAction(Actions.scaleTo(1f, 1f, 1));
+	}
+	
+	
 }
