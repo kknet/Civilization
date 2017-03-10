@@ -5,8 +5,10 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.graphics.FPSLogger;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kongyt.civilization.CivilizationApplication;
+import com.kongyt.civilization.entities.HeroAgent;
 import com.kongyt.civilization.utils.SV;
 import com.kongyt.civilization.views.BaseScene;
 import com.kongyt.civilization.views.GameScene;
@@ -157,6 +159,59 @@ public class GM {
 	
 	public void endTimeLine(){
 		this.timeRuning = false;
+	}
+	
+	//==========================================角色==============================================
+	private HeroAgent hero;
+	public void setHero(HeroAgent hero){
+		this.hero = hero;
+	}
+	
+	public HeroAgent getHero(){
+		return this.hero;
+	}
+	
+	
+	//==========================================鼠标光标==========================================
+	private Pixmap mouse1;
+	private Pixmap mouse2;
+	private Pixmap mouse3;
+	
+	public Pixmap getMouse1Pixmap(){
+		if(this.mouse1 == null){
+			this.mouse1 = new Pixmap(Gdx.files.internal("images/ui/mouse.png"));
+		}
+		return this.mouse1;
+	}
+	public Pixmap getMouse2Pixmap(){
+		if(this.mouse2 == null){
+			this.mouse2 = new Pixmap(Gdx.files.internal("images/ui/mouse_red.png"));
+		}
+		return this.mouse2;
+	}
+	
+	public Pixmap getMouse3Pixmap(){
+		if(this.mouse3 == null){
+			this.mouse3 = new Pixmap(Gdx.files.internal("images/ui/mouse_green.png"));
+		}
+		return this.mouse3;
+	}
+	
+	
+	private int mouseType = 0;
+	public void setMouse(int type){
+		if(this.mouseType != type){
+			this.mouseType = type;
+			if(type == 1){
+				Gdx.input.setCursorImage(this.getMouse1Pixmap(), 0, 0);
+			}else if(type == 2){
+				Gdx.input.setCursorImage(this.getMouse2Pixmap(), 0, 0);
+			}else {
+				Gdx.input.setCursorImage(this.getMouse3Pixmap(), 0, 0);
+			}
+		}
+		
+		
 	}
 	
 	

@@ -19,7 +19,8 @@ public class CivilizationApplication extends LwjglApplication {
 	@Override
 	public void exit() {
 		// TODO Auto-generated method stub
-		GM.instance().onExit();		
+		//GM.instance().onExit();	
+		super.exit();
 	}
 
 

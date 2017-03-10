@@ -89,6 +89,7 @@ public class GameScene extends BaseScene {
 //				img.addAction(Actions.moveTo(SV.SCREEN_WIDTH/2, SV.SCREEN_HEIGHT/2, 5));
 //				break;
 			}
+			
 			return super.keyDown(keycode);
 		}
 		
@@ -145,14 +146,17 @@ public class GameScene extends BaseScene {
 	
 	private void init(){
 		this.viewRoot = new ViewRoot(this.stage.getRoot());
-		this.gameMap = new GameMap(100, 100, 32, 32);
+		this.gameMap = new GameMap(20, 20, 32, 32);
 		this.stage.addActor(this.gameMap);
 		
 		this.heroAgent = new HeroAgent(this.stage.getCamera(), this.gameMap);
 		this.heroAgent.setPosition(0, 0);
-		this.stage.addActor(this.heroAgent);
+		this.gameMap.setHero(this.heroAgent);
 		
-		Gdx.input.setCursorImage(new Pixmap(Gdx.files.internal("images/ui/mouse.png")), 0, 0);
+		
+		GM.instance().setHero(this.heroAgent);
+		
+		GM.instance().setMouse(1);
 	}
 	
 
@@ -180,8 +184,8 @@ public class GameScene extends BaseScene {
 		// TODO Auto-generated method stub
 		super.show();
 		InputMultiplexer inputMultiplexer = new InputMultiplexer();
-		inputMultiplexer.addProcessor(input);
 		inputMultiplexer.addProcessor(stage);
+		inputMultiplexer.addProcessor(input);
 		Gdx.input.setInputProcessor(inputMultiplexer);
 	}
 
