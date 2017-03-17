@@ -1,0 +1,42 @@
+
+hero_common.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+btn_bg
+  rotate: false
+  xy: 164, 13
+  size: 80, 36
+  orig: 80, 36
+  offset: 0, 0
+  index: -1
+health
+  rotate: false
+  xy: 2, 2
+  size: 3, 9
+  split: 1, 1, 0, 9
+  orig: 3, 9
+  offset: 0, 0
+  index: -1
+health_bg
+  rotate: false
+  xy: 250, 40
+  size: 3, 9
+  split: 1, 1, 0, 9
+  orig: 3, 9
+  offset: 0, 0
+  index: -1
+text_field_bg
+  rotate: false
+  xy: 2, 13
+  size: 160, 36
+  orig: 160, 36
+  offset: 0, 0
+  index: -1
+text_field_cursor
+  rotate: false
+  xy: 246, 20
+  size: 2, 29
+  orig: 5, 36
+  offset: 3, 4
+  index: -1

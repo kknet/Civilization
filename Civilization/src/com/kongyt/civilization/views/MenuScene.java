@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.TextureData.TextureDataType;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.kongyt.civilization.managers.GM;
 import com.kongyt.civilization.utils.SV;
 
@@ -31,7 +33,7 @@ public class MenuScene extends BaseScene {
 				GM.instance().changeScene(SV.SCENE_GAME);
 				break;
 			case Keys.ESCAPE:
-				GM.instance().getApplication().realExit();
+				GM.instance().exitGame();
 				break;
 			}
 			GM.instance().logD("按键"+keycode+"按下");

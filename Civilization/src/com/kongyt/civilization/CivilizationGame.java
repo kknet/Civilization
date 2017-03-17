@@ -19,7 +19,7 @@ public class CivilizationGame extends Game {
 		GM.instance().registerGame(this);
 	
 		// 切换场景到主菜单
-		GM.instance().changeScene(SV.SCENE_GAME);
+		GM.instance().changeScene(SV.SCENE_LOGIN);
 	}
 
 }

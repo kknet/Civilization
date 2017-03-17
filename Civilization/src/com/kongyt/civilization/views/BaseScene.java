@@ -25,6 +25,9 @@ public class BaseScene implements Screen {
 	@Override
 	public void render(float delta) {
 		// TODO Auto-generated method stub
+		// 分发消息
+		GM.instance().getNet().dispatchMsg();
+		
 		// 调试信息
 		if (SV.DEBUG) {
 			int renderCalls = batch.renderCalls;
@@ -36,22 +39,6 @@ public class BaseScene implements Screen {
 					/ 1024f + " Mb", 20, 70);
 			font.draw(batch, "JavaHeap  : " + Gdx.app.getJavaHeap() / 1024f
 					/ 1024f + " Mb", 20, 40);
-			
-			
-			font.draw(batch, "Wood:", SV.SCREEN_WIDTH - 100, SV.SCREEN_HEIGHT - 10);
-			font.draw(batch, "Coal:" , SV.SCREEN_WIDTH - 100, SV.SCREEN_HEIGHT - 30);
-			font.draw(batch, "Stone:", SV.SCREEN_WIDTH - 100, SV.SCREEN_HEIGHT - 50);
-			font.draw(batch, "Copper:", SV.SCREEN_WIDTH - 100, SV.SCREEN_HEIGHT - 70);
-			font.draw(batch, "Oil:", SV.SCREEN_WIDTH - 100, SV.SCREEN_HEIGHT - 90);
-			font.draw(batch, "Iron:", SV.SCREEN_WIDTH - 100, SV.SCREEN_HEIGHT - 110);
-			
-			float dx = 60;
-			font.draw(batch, "" + GM.instance().getHero().getWoodAmount(), SV.SCREEN_WIDTH - 100 + dx, SV.SCREEN_HEIGHT - 10);
-			font.draw(batch, "" + GM.instance().getHero().getCoalAmount(), SV.SCREEN_WIDTH - 100 + dx, SV.SCREEN_HEIGHT - 30);
-			font.draw(batch, "" + GM.instance().getHero().getStoneAmount(), SV.SCREEN_WIDTH - 100 + dx, SV.SCREEN_HEIGHT - 50);
-			font.draw(batch, "" + GM.instance().getHero().getCopperAmount(), SV.SCREEN_WIDTH - 100 + dx, SV.SCREEN_HEIGHT - 70);
-			font.draw(batch, "" + GM.instance().getHero().getOilAmount(), SV.SCREEN_WIDTH - 100 + dx, SV.SCREEN_HEIGHT - 90);
-			font.draw(batch, "" + GM.instance().getHero().getIronAmount(), SV.SCREEN_WIDTH - 100 + dx, SV.SCREEN_HEIGHT - 110);
 			batch.end();
 		}
 	}
@@ -92,8 +79,4 @@ public class BaseScene implements Screen {
 
 	}
 
-	
-	public void onExit(){
-		
-	}
 }

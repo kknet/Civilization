@@ -1,17 +1,12 @@
 package com.kongyt.civilization.managers;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.graphics.FPSLogger;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.kongyt.civilization.CivilizationApplication;
-import com.kongyt.civilization.entities.HeroAgent;
+import com.kongyt.civilization.net.Net;
 import com.kongyt.civilization.utils.SV;
-import com.kongyt.civilization.views.BaseScene;
 import com.kongyt.civilization.views.GameScene;
+import com.kongyt.civilization.views.LoginScene;
 import com.kongyt.civilization.views.MenuScene;
 
 public class GM {
@@ -39,14 +34,6 @@ public class GM {
 	
 	//===============================================游戏相关==================================================
 	
-	private CivilizationApplication app;
-	public void registerApplication(CivilizationApplication app){
-		this.app = app;
-	}
-	
-	public CivilizationApplication getApplication(){
-		return this.app;
-	}
 	
 	private Game game;
 	
@@ -61,11 +48,12 @@ public class GM {
 	}
 	
 	
-	// 处理退出事件
-	public void onExit(){
-		((BaseScene)(this.game.getScreen())).onExit();
+	// 退出游戏
+	public void exitGame(){		
+		GM.instance.logD("游戏退出");
+		relInstance();
+		Gdx.app.exit();
 	}
-	
 	
 	// 销毁资源
 	private void destory(){
@@ -81,6 +69,9 @@ public class GM {
 		switch(sceneId){
 		case SV.SCENE_LOADING:
 			this.logE("场景暂不存在");
+			break;
+		case SV.SCENE_LOGIN:
+			this.game.setScreen(new LoginScene());
 			break;
 		case SV.SCENE_MENU:
 			this.logD("切换到主菜单场景");
@@ -160,59 +151,25 @@ public class GM {
 	public void endTimeLine(){
 		this.timeRuning = false;
 	}
-	
-	//==========================================角色==============================================
-	private HeroAgent hero;
-	public void setHero(HeroAgent hero){
-		this.hero = hero;
-	}
-	
-	public HeroAgent getHero(){
-		return this.hero;
-	}
-	
-	
-	//==========================================鼠标光标==========================================
-	private Pixmap mouse1;
-	private Pixmap mouse2;
-	private Pixmap mouse3;
-	
-	public Pixmap getMouse1Pixmap(){
-		if(this.mouse1 == null){
-			this.mouse1 = new Pixmap(Gdx.files.internal("images/ui/mouse.png"));
+
+	// ============================网络相关================================
+	private Net net;
+
+	public Net getNet() {
+		if (net == null) {
+			net = new Net();
 		}
-		return this.mouse1;
+		return net;
 	}
-	public Pixmap getMouse2Pixmap(){
-		if(this.mouse2 == null){
-			this.mouse2 = new Pixmap(Gdx.files.internal("images/ui/mouse_red.png"));
-		}
-		return this.mouse2;
+
+	private String uuid = null;
+
+	public String getUuid() {
+		// TODO Auto-generated method stub
+		return uuid;
 	}
-	
-	public Pixmap getMouse3Pixmap(){
-		if(this.mouse3 == null){
-			this.mouse3 = new Pixmap(Gdx.files.internal("images/ui/mouse_green.png"));
-		}
-		return this.mouse3;
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
-	
-	
-	private int mouseType = 0;
-	public void setMouse(int type){
-		if(this.mouseType != type){
-			this.mouseType = type;
-			if(type == 1){
-				Gdx.input.setCursorImage(this.getMouse1Pixmap(), 0, 0);
-			}else if(type == 2){
-				Gdx.input.setCursorImage(this.getMouse2Pixmap(), 0, 0);
-			}else {
-				Gdx.input.setCursorImage(this.getMouse3Pixmap(), 0, 0);
-			}
-		}
-		
-		
-	}
-	
-	
 }
