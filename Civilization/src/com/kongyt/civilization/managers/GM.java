@@ -158,6 +158,7 @@ public class GM {
 	public Net getNet() {
 		if (net == null) {
 			net = new Net();
+			net.conn("115.29.53.18", 8888);
 		}
 		return net;
 	}

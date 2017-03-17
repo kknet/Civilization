@@ -176,14 +176,15 @@ public class LoginScene extends BaseScene {
 		String username = usernameTF.getText();
 		String password = passwordTF.getText();
 		
-		//baseModule.sendRegisterRequest(username, password);
+		baseModule.sendRegisterReq(username, password);
 	}
 
 	private void login(){
 		String username = usernameTF.getText();
 		String password = passwordTF.getText();
 		
-		//baseModule.sendLoginRequest(username, password);
+		if(GM.instance().getUuid() != null)
+			baseModule.sendLoginReq(GM.instance().getUuid());
 		
 
 	}

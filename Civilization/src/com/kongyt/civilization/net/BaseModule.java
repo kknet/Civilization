@@ -3,12 +3,12 @@ package com.kongyt.civilization.net;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.kongyt.civilization.managers.GM;
-import com.kongyt.duel.messages.Message.LoginReq;
-import com.kongyt.duel.messages.Message.Msg;
-import com.kongyt.duel.messages.Message.ReconnectReq;
-import com.kongyt.duel.messages.Message.RegisterReq;
-import com.kongyt.duel.messages.Message.Request;
-import com.kongyt.duel.messages.Message.Response;
+import com.kongyt.civilization.messages.Message.LoginReq;
+import com.kongyt.civilization.messages.Message.Msg;
+import com.kongyt.civilization.messages.Message.ReconnectReq;
+import com.kongyt.civilization.messages.Message.RegisterReq;
+import com.kongyt.civilization.messages.Message.Request;
+import com.kongyt.civilization.messages.Message.Response;
 
 
 
@@ -42,21 +42,6 @@ public class BaseModule extends BaseMsgModule {
 			onReconnectRes(msgPacket);
 			break;
 			
-		// 处理开始游戏通知
-		case Msg.Start_Game_Noti_VALUE:
-			onStartGameNoti();
-			break;
-		
-		// 处理对手离开游戏通知
-		case Msg.Peer_Leave_Noti_VALUE:
-			onPeerLeaveNoti();
-			break;
-			
-		// 处理转发消息
-		case Msg.Route_Msg_VALUE:
-			onRouteMsg();
-			break;
-			
 		default:
 			GM.instance().logD("未知消息类型");
 			break;			
@@ -81,9 +66,11 @@ public class BaseModule extends BaseMsgModule {
 
 
 	// 发送注册消息
-	public void sendRegisterReq(){
+	public void sendRegisterReq(String userName, String password){
 		Request req = Request.newBuilder()
 							.setRegisterReq(RegisterReq.newBuilder()
+													.setUserName(userName)
+													.setPassword(password)
 													.build())
 							.build();
 		byte[] reqBytePacket = req.toByteArray();
@@ -104,9 +91,8 @@ public class BaseModule extends BaseMsgModule {
 			Response res = Response.parseFrom(msgPacket.msgData);
 			if (res.getResult() == true) {
 				String uuid = res.getRegisterRes().getUuid();
-				String name = res.getRegisterRes().getName();
 				GM.instance().setUuid(uuid);
-				GM.instance().logD("注册成功(uuid="+uuid + "  name=" + name + ")");
+				GM.instance().logD("注册成功(uuid="+uuid + ")");
 			} else {
 				GM.instance().logD("注册失败");
 				GM.instance().logD("错误描述信息: " + res.getErrorDescribe());
